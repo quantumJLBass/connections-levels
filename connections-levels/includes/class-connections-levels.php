@@ -145,6 +145,7 @@ if (!class_exists('Connections_Levels')) {
 			$out .='<option value="">'.__('Must choose', 'connections_levels' ).'</option>';	
 			//this would be pulled from the ?options?
 			$levels = array(
+				'pending'=>__('Pending', 'connections_levels' ),
 				'member'=>__('Member', 'connections_levels' ),
 				'affiliate'=>__('Affiliate', 'connections_levels' )
 			);
