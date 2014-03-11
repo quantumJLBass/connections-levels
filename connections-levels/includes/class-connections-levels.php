@@ -127,7 +127,7 @@ if (!class_exists('Connections_Levels')) {
 		public static function registerMetabox( $metabox ) {
 			$atts = array(
 				'id'       => 'leveled',
-				'title'    => __( 'Last Email Sent', 'sent_datetime' ),
+				'title'    => __( 'Membership Levels', 'sent_datetime' ),
 				'context'  => 'side',
 				'priority' => 'core',
 				'fields'   => array(
@@ -141,20 +141,26 @@ if (!class_exists('Connections_Levels')) {
 		}
 		public static function field( $field, $value ) {
 			
-			$out ='<select name="cnlevels" >';
-			$out .='<option value="">'.__('Must choose', 'connections_levels' ).'</option>';	
-			//this would be pulled from the ?options?
 			$levels = array(
-				'pending'=>__('Pending', 'connections_levels' ),
+				//'pending'=>__('Pending', 'connections_levels' ),
 				'member'=>__('Member', 'connections_levels' ),
 				'affiliate'=>__('Affiliate', 'connections_levels' )
-			);
-			foreach($levels as $slug=>$label){
-				$out .='<option value="'.$slug.'" '.selected($value, $slug, false).'>'.$label.'</option>';	
+			);			
+			
+				$out ='<select name="cnlevels" >';
+				$out .='<option value="">'.__('Must choose', 'connections_levels' ).'</option>';	
+				//this would be pulled from the ?options?
+			
+				foreach($levels as $slug=>$label){
+					$out .='<option value="'.$slug.'" '.selected($value, $slug, false).'>'.$label.'</option>';	
+				}
+				$out .='</select>';
+			if(is_admin()){
+				printf( '<label>%s</label>%s', __( 'Level', 'connections_levels' ), $out);	
+			}else{
+				printf('<div class="postbox" id="metabox-leveled"><h3 class="hndle"><span>%s</span></h3><div class="cnf-inside"><div class="form-field" id="cn-leveled"><div class="cn-float-left" id="leveled"><label>%s</label></div></div><div class="cn-clear"></div></div></div>', __( 'Level', 'connections_levels' ), $out);	
 			}
-			$out .='</select>';
 
-			printf( '<label>%s</label>%s', __( 'Level', 'connections_levels' ), $out);
  
 		}
 
